@@ -80,6 +80,8 @@ public class MainActivity extends Activity {
 	    }
 	}
 	
+	// AsyncTask used to create background tasks without interrupting the main UI thread
+	// This class sends POST requests to a given URL and handles the JSON response data
 	private class jsonParser extends AsyncTask {
 
 		@Override
@@ -92,6 +94,8 @@ public class MainActivity extends Activity {
 			}
 		}
 		
+		// This method is invoked on the UI thread after the background task finishes.
+		// The result of the background computation is passed to this method as a param
 		protected void onPostExecute(Object o) {
 			try {
 				JSONObject json = (JSONObject) o;
@@ -122,6 +126,8 @@ public class MainActivity extends Activity {
 			}
 		}
 
+		// Uses an HTTP client to execute an HttpPost request to a given URL, and returns
+		// the JSON response
 		private JSONObject sendPostReqToUrl(String siteURL) throws IOException {
 			InputStream in = null;
 			HttpClient client = new DefaultHttpClient();
@@ -158,6 +164,7 @@ public class MainActivity extends Activity {
             }
 		}
 
+		// Helper method to convert an InputStream to a String
 		private String convertStreamToString(InputStream in) {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 	        StringBuilder sb = new StringBuilder();
